@@ -69,10 +69,12 @@ fi
 # download paddle model
 echo "Model name is $MODEL_NAME"
 if [ "$MODEL_NAME" == "Picodet" ]; then
-  wget https://bj.bcebos.com/v1/paddledet/deploy/Inference/picodet_s_320_coco_lcnet_no_nms.tar
-  tar -xf picodet_s_320_coco_lcnet_no_nms.tar
-  rm -rf picodet_s_320_coco_lcnet_no_nms.tar
-  mv picodet_s_320_coco_lcnet_no_nms model
+  if [ ! -e picodet_s_320_coco_lcnet_no_nms.tar ]; then
+    wget https://bj.bcebos.com/v1/paddledet/deploy/Inference/picodet_s_320_coco_lcnet_no_nms.tar
+    tar -xf picodet_s_320_coco_lcnet_no_nms.tar
+    #rm -rf picodet_s_320_coco_lcnet_no_nms.tar
+    mv picodet_s_320_coco_lcnet_no_nms model
+  fi
 else
   echo 'ERROR: --model only support Picodet' >&2
   exit 1
